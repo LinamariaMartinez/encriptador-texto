@@ -1,16 +1,18 @@
 var botonEncriptar = document.querySelector(".btn-encriptar");
 var botonDesencriptar = document.querySelector(".btn-desencriptar");
-var munheco = document.querySelector(".contenedor-munheco");
-var contenedor = document.querySelector(".contenedor.parrafo");
+/*var munheco = document.querySelector(".contenedor-munheco");*/
+var contenedor = document.querySelector("#munheco");
 var resultado = document.querySelector(".texto-resultado");
+var rs = document.querySelector("#resultado");
 
 botonEncriptar.onclick = encriptar;
 botonDesencriptar.onclick = desencriptar;
 
 function encriptar(){
-    ocultarAdelante();
+    /*ocultarAdelante();*/
     var cajatexto = recuperarTexto()
     resultado.textContent = encriptarTexto(cajatexto);
+    mostrar();
 }
 
 function desencriptar(){
@@ -24,9 +26,13 @@ function recuperarTexto(){
     return cajatexto.value
 }
 
+function mostrar(){
+    rs.style.display = "block";
+    contenedor.style.display = "none";
+}
+
 function ocultarAdelante(){
-    munheco.classList.add("ocultar");
-    contenedor.classList.add("ocultar");
+
 }
 
 function encriptarTexto(mensaje){
@@ -49,7 +55,7 @@ function encriptarTexto(mensaje){
         else if(texto[i] == "u"){
             textoFinal = textoFinal + "ufat"
         }
-        else{
+        else {
             textoFinal = textoFinal + texto[i]
         }
     }
@@ -94,3 +100,10 @@ const btnCopiar = document.querySelector(".btn-copiar");
     navigator.clipboard.writeText(contenido);
     console.log("hola"); 
 });
+
+// const btnPegar = document.querySelector(".btn-pegar"); 
+//     btnPegar.addEventListener("click", pegar = () => {
+//     var contenido = document.querySelector(".texto-resultado").textContent;
+//     console.log("Texto en portapapeles");
+//     console.error('Error in copying text: ');
+// });
