@@ -1,0 +1,527 @@
+:root{
+    --altura-header: 50px;
+    --altura-footer: 90px;
+    --altura-main: calc(100vh - var(--altura-header) - var(--altura-footer));
+    --color_primario: #F3F5FC;
+    --color_secundario: #0A3871;
+    --color_terciario: #D8DFE8;
+    --color_cuaternario: #495057;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body{
+    background: var(--color_primario);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header{
+    height: var(--altura-header);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.logo{
+    width: 150px;
+    height: 80px;
+    padding-left: 40px;
+    padding-top: 40px;
+}
+
+/* .tituloPrincipal{
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Inter', sans-serif;
+    color: var(--color_secundario);
+    font-weight: bold;
+    padding-right: 40px;
+} */
+
+main{
+    height: var(--altura-main);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    margin-left: 80px;
+    align-items: center;
+}
+
+.seccion1, .seccion2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.seccion1{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 80px;
+    padding-right: 30px;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.contenedor-cajatexto{
+    width: 100%;
+    height: 800px;
+    padding-top: 10px;
+    border: none;
+    text-transform: lowercase;
+    margin-top: 90px;
+    color: var(--color_primario);
+}
+
+::placeholder {color: #0A3871;}
+    .contenedor-cajatexto {
+        outline: none;
+    }
+
+.cajatexto{
+    width: 100%;
+    height: 100%;
+    top: 100px;
+    border: none;
+    background-color: #f4f4fc;
+    cursor: pointer;
+    color: var(--color_secundario);
+    font-size: 32px;
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+}
+
+.cajatexto::placeholder{
+    color: var(--color_secundario);
+}
+
+.alerta{
+    display: flex;
+    align-items: center; 
+    justify-content: start; 
+    color: var(--color_cuaternario);
+    font-size: 18px;
+    padding: 15px; 
+    background-repeat: no-repeat;
+    border: none;
+    text-align: left;
+    width: 100%;
+    margin-top: 18px;
+}
+
+.alerta img {
+    margin-right: 10px; /* Espacio entre la imagen y el texto */
+}
+
+.contenedor-botones{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 18px;
+}
+
+.btn-encriptar{
+    width: 328px;
+    height: 67px;
+    border-radius: 24px;
+    background-color: var(--color_secundario);
+    border: 1px solid var(--color_secundario);
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+.btn-desencriptar{
+    width: 328px;
+    height: 67px;
+    border-radius: 24px;
+    border: 1px solid var(--color_secundario);
+    background-color: var(--color_terciario);
+    color: var(--color_secundario);
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid #0A3871;
+    cursor: pointer;
+    margin-bottom: 30px;
+    margin-left: 72px;
+}
+
+.seccion2{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    flex: 1; /* Las secciones ocuparán el mismo espacio */
+    box-sizing: border-box;
+}
+
+#munheco{
+    background-repeat: no-repeat;
+    background-color: white;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 400px;
+    height: 944px;
+    padding: 5px; 
+    margin-top: 20px;
+    background-color: white;
+    box-sizing: border-box;
+    border-radius: 32px;
+    box-shadow: 0px 24px 32px -8px rgba(0, 0, 0, 0.50);
+    position: relative; /* Cambiado de fixed a relative */
+}
+
+.contenedor-munheco{
+    box-sizing: border-box;
+    padding-top: 50px;
+    text-align: center;
+    max-height: 100%;
+    overflow: auto; /* Permite scroll interno si el contenido es demasiado grande */
+}
+
+.contenedor-munheco img {
+    max-width: 100%; /* Asegura que la imagen no sobrepase el contenedor */
+    height: auto; /* Mantiene las proporciones de la imagen */
+    display: block; /* Evita que la imagen genere un espacio extra por ser inline */
+}
+
+.contenedor-parrafo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 50px;
+    background-color: #ffffff; 
+    border-radius: 24px;
+    overflow: auto; /* Permite scroll interno si el contenido es demasiado grande */
+    max-height: 100%;
+}
+
+.contenedor-parrafo:focus{
+    outline: none;
+}
+
+.contenedor-parrafo h3{
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    color: gray-500;
+}
+
+.contenedor-parrafo p{
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    color: gray-400;
+    padding-top: 20px;
+    border: none;
+}
+
+#resultado{
+    display: none;
+    width: 60%;
+    height: 100%;
+    box-sizing: border-box;
+    padding-right: 40px;
+}
+
+.contenedor-resultado{
+    width: 100%;
+    height: 700px;
+    padding: 40px;
+    padding-bottom: 80px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    border-radius: 32px;
+    box-shadow: 0px 24px 32px -8px rgba(0, 0, 0, 0.50);
+    overflow: hidden; /* Oculta el contenido que excede el contenedor */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.texto-resultado {
+    flex: 1; /* Ocupa todo el espacio disponible menos el espacio para los botones */
+    overflow-y: auto; /* Permite hacer scroll si el texto es largo */
+    padding-bottom: 80px; 
+    color: #495057;
+    font-size: 24px;
+    word-wrap: break-word; /* Permite que las palabras largas se dividan en líneas */
+    text-align: left;
+}
+
+.contenedor-resultado p{
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #495057;
+    font-size: 24px;
+}
+
+.contenedor-copiarpegar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    height: 60px; 
+    position: absolute; /* Fija la posición de los botones dentro del contenedor resultado */
+    bottom: 70px; /* Espacio desde el borde inferior del contenedor de resultados */
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    padding: 20px; 
+}
+
+.btn-copiar{
+    width: 336px;
+    height: 67px;
+    border-radius: 24px;
+    background-color: #ffffff;
+    color: var(--color_secundario);
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid var(--color_secundario);
+    cursor: pointer;
+    margin-bottom: 0px;
+    position: relative;
+}
+
+.btn-pegar{
+    width: 336px;
+    height: 67px;
+    border-radius: 24px;
+    background-color: var(--color_terciario);
+    color: var(--color_secundario);
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid var(--color_secundario);
+    cursor: pointer;
+    margin-bottom: 0px;
+    /* margin-left: 108px;
+    margin-top: 402px */;
+    position: relative;
+}
+
+.resaltado {
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+    transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+}
+
+footer{
+    height: var(--altura-footer);
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-family: 'Inter', sans-serif;
+    color: #0A3871;
+    flex-shrink: 0;
+    margin-top: auto;
+}
+
+footer p{
+    margin: auto;
+}
+
+
+.ocultar{
+    display: none;
+}
+
+
+.mostrar{
+    display: block;
+}
+
+/* Estilos para dispositivos móviles y tablets */
+@media (max-width: 1024px) and (min-width: 600px) {
+    main {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 0;
+        height: auto;
+    }
+
+    .seccion1, .seccion2 {
+        width: 100%; /* Las secciones ocuparán todo el ancho disponible */
+        padding: 20px;
+    }
+
+    .seccion1 {
+        padding: 60px 60px 10px 60px;;
+    }
+
+    #munheco img {
+        display: none; /* Ocultar la imagen del muñeco en pantallas pequeñas */
+    }
+
+    .contenedor-cajatexto, .contenedor-resultado {
+        height: auto;
+    }
+
+    #munheco, #resultado {
+        width: 90%;
+        height: auto;
+    }
+
+    .contenedor-munheco {
+        width: 100%;
+        padding: 20px;
+    }
+
+    #resultado {
+        width: 90%;
+        margin-top: 20px;
+        justify-content: center;
+    }
+
+    .contenedor-resultado {
+        height: auto; /* Ajusta la altura automáticamente */
+        padding: 50px; /* Espaciado uniforme en pantallas más pequeñas */
+    }
+
+    .contenedor-copiarpegar {
+        bottom: 30px;
+    }
+
+    .btn-copiar, .btn-pegar {
+        width: 100%; /* Botones ocupan todo el ancho disponible */
+        height: 60px; /* Ajusta la altura de los botones */
+    }
+
+    footer {
+        position: sticky; /* Asegura que el footer se quede al final del contenido */
+        margin-top: 20px; /* Empuja el footer al final de la pantalla si el contenido es más corto */
+    }
+}
+
+/* Media query para móviles (pantallas de hasta 600px) */
+@media (max-width: 600px) {
+    body {
+        margin: 0;
+    }
+
+    main {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 0;
+        height: auto;
+    }
+    .seccion1, .seccion2 {
+        width: 100%;
+        padding: 10px;
+        /* margin: 0; */
+    }
+
+    .seccion1 {
+        padding: 60px 60px 10px 60px; /* top | right | bottom | left */
+        margin: 10px;
+    }
+
+    #munheco img {
+        display: none; /* Ocultar la imagen del muñeco en pantallas pequeñas */
+    }
+
+    .contenedor-cajatexto, .contenedor-resultado {
+        height: auto;
+    }
+
+    .contenedor-cajatexto {
+        margin-top: 10px;
+    }
+
+    #munheco, #resultado {
+        width: 90%;
+        height: auto;
+    }
+
+    .contenedor-munheco {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .alerta {
+        width: 100%;
+        padding: 0;
+        margin-top: 10px;
+        font-size: 12px;
+    }
+
+    .contenedor-botones {
+        width: 100%;
+        bottom: 30px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-encriptar, .btn-desencriptar {
+        width: 100%;
+        height: 60px;
+        margin: 0 10px 10px 0;
+    }
+
+    #resultado {
+        width: 90%;
+        margin-top: 20px;
+        justify-content: center;
+    }
+
+    .contenedor-resultado {
+        height: auto; /* Ajusta la altura automáticamente */
+        padding: 50px; /* Espaciado uniforme en pantallas más pequeñas */
+    }
+
+    .contenedor-copiarpegar {
+        bottom: 30px;
+    }
+
+    .btn-copiar, .btn-pegar {
+        width: 100%; /* Botones ocupan todo el ancho disponible */
+        height: 60px; /* Ajusta la altura de los botones */
+    }
+
+    footer {
+        position: sticky; /* Asegura que el footer se quede al final del contenido */
+        margin-top: 20px; /* Empuja el footer al final de la pantalla si el contenido es más corto */
+        width: 100%;
+        
+    }
+}
