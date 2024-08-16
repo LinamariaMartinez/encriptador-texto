@@ -1,0 +1,11 @@
+# Ignorar archivos .DS_Store (macOS)
+.DS_Store
+
+# Ignorar carpetas específicas
+/node_modules/
+/dist/
+/build/
+
+# Ignorar archivos de configuración específicos
+*.log
+*.env
