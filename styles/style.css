@@ -522,6 +522,5 @@ footer p{
         position: sticky; /* Asegura que el footer se quede al final del contenido */
         margin-top: 20px; /* Empuja el footer al final de la pantalla si el contenido es más corto */
         width: 100%;
-        
     }
 }
