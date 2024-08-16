@@ -135,3 +135,26 @@ botones.forEach(boton => {
     boton.addEventListener('click', resaltarBoton);
 });
 
+// Función para detectar si la media query está activa
+function isMediaQueryActive() {
+    return window.matchMedia("(max-width: 700px)").matches;
+}
+
+// Función para hacer scroll hacia el contenedor
+function scrollToTextBox() {
+    if (isMediaQueryActive()) {
+        document.querySelector('.contenedor-cajatexto').scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'nearest'
+        });
+    }
+}
+
+// Asignar el evento al botón pegar
+document.querySelector('.btn-pegar').addEventListener('click', function() {
+    // Tu lógica para pegar el contenido aquí
+    scrollToTextBox(); // Desplazarse al contenedor después de pegar
+});
+
+
