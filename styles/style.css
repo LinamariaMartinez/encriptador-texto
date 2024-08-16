@@ -348,9 +348,10 @@ footer{
     height: 50px;
     line-height: 50px;
     font-family: 'Inter', sans-serif;
-    color: #0A3871;
+    color: #ffffff;
     flex-shrink: 0;
     margin-top: auto;
+    background-color: var(--color_secundario);
 }
 
 footer p{
