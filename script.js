@@ -13,16 +13,17 @@ function encriptar() {
         resultado.textContent = encriptarTexto(cajatexto);
         mostrar();
     } else {
-        alert("El texto debe estar en minúsculas y sin acentos.");
+        alert("El texto debe estar en minúsculas, sin caracteres especiales y sin acentos.");
     }
 }
 
 function desencriptar() {
     var cajatexto = recuperarTexto();
-    if (validarTexto(cajatexto)) {
+    if (validarTexto(cajatexto) || cajatexto.match(/ai|enter|imes|ober|ufat/)) {
         resultado.textContent = desencriptarTexto(cajatexto);
+        mostrar();
     } else {
-        alert("El texto debe estar en minúsculas y sin acentos.");
+        alert("El texto debe estar en minúsculas, sin caracteres especiales y sin acentos.");
     }
 }
 
@@ -34,6 +35,7 @@ function recuperarTexto() {
 function mostrar() {
     rs.style.display = "block";
     contenedor.style.display = "none";
+    scrollToResultado(); // Desplazarse al contenedor de resultado después de mostrarlo
 }
 
 function ocultarAdelante() {
@@ -68,30 +70,17 @@ function encriptarTexto(mensaje) {
 }
 
 function desencriptarTexto(mensaje) {
-    var textoFinal = "";
+    var textoFinal = mensaje;
 
-    for (var i = 0; i < mensaje.length; i++) {
-        if (mensaje[i] == "a") {
-            textoFinal += "a";
-            i += 1;
-        } else if (mensaje[i] == "e") {
-            textoFinal += "e";
-            i += 4;
-        } else if (mensaje[i] == "i") {
-            textoFinal += "i";
-            i += 3;
-        } else if (mensaje[i] == "o") {
-            textoFinal += "o";
-            i += 3;
-        } else if (mensaje[i] == "u") {
-            textoFinal += "u";
-            i += 3;
-        } else {
-            textoFinal += mensaje[i];
-        }
-    }
+    textoFinal = textoFinal.replace(/ai/g, "a");
+    textoFinal = textoFinal.replace(/enter/g, "e");
+    textoFinal = textoFinal.replace(/imes/g, "i");
+    textoFinal = textoFinal.replace(/ober/g, "o");
+    textoFinal = textoFinal.replace(/ufat/g, "u");
+
     return textoFinal;
 }
+
 
 // Botón Copiar
 const btnCopiar = document.querySelector(".btn-copiar"); 
@@ -140,10 +129,10 @@ function isMediaQueryActive() {
     return window.matchMedia("(max-width: 700px)").matches;
 }
 
-// Función para hacer scroll hacia el contenedor
-function scrollToTextBox() {
+// Función para hacer scroll hacia el contenedor de resultado
+function scrollToResultado() {
     if (isMediaQueryActive()) {
-        document.querySelector('.contenedor-cajatexto').scrollIntoView({
+        document.querySelector('.contenedor-resultado').scrollIntoView({
             behavior: 'smooth',
             block: 'start',
             inline: 'nearest'
@@ -151,10 +140,26 @@ function scrollToTextBox() {
     }
 }
 
-// Asignar el evento al botón pegar
-document.querySelector('.btn-pegar').addEventListener('click', function() {
-    // Tu lógica para pegar el contenido aquí
-    scrollToTextBox(); // Desplazarse al contenedor después de pegar
+// Asignar el evento al botón encriptar y desencriptar para desplazarse después de la acción
+document.querySelector('.btn-encriptar').addEventListener('click', function() {
+    scrollToResultado();
 });
 
+document.querySelector('.btn-desencriptar').addEventListener('click', function() {
+    scrollToResultado();
+});
 
+// Función para hacer scroll hacia el contenedor
+function scrollToTop() {
+    if (isMediaQueryActive()) {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+}
+
+// Asignar el evento al botón pegar
+document.querySelector('.btn-pegar').addEventListener('click', function() {
+    scrollToTop(); // Desplazarse al incio de la página después de pegar
+});
