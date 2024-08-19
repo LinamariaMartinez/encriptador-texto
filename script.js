@@ -12,6 +12,7 @@ function encriptar() {
     if (validarTexto(cajatexto)) {
         resultado.textContent = encriptarTexto(cajatexto);
         mostrar();
+        document.querySelector(".cajatexto").value = ""; // Borra el contenido de cajatexto
     } else {
         alert("El texto debe estar en minúsculas, sin caracteres especiales y sin acentos.");
     }
@@ -22,6 +23,7 @@ function desencriptar() {
     if (validarTexto(cajatexto) || cajatexto.match(/ai|enter|imes|ober|ufat/)) {
         resultado.textContent = desencriptarTexto(cajatexto);
         mostrar();
+        document.querySelector(".cajatexto").value = ""; // Borra el contenido de cajatexto
     } else {
         alert("El texto debe estar en minúsculas, sin caracteres especiales y sin acentos.");
     }
