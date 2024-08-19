@@ -9,10 +9,12 @@ botonDesencriptar.onclick = desencriptar;
 
 function encriptar() {
     var cajatexto = recuperarTexto();
-    if (validarTexto(cajatexto)) {
+    if (cajatexto === "") {
+        mostrarMensajeNoEncontrado();
+    } else if (validarTexto(cajatexto)) {
         resultado.textContent = encriptarTexto(cajatexto);
         mostrar();
-        document.querySelector(".cajatexto").value = ""; // Borra el contenido de cajatexto
+        document.querySelector(".cajatexto").value = ""; // Limpiar la cajatexto
     } else {
         alert("El texto debe estar en minúsculas, sin caracteres especiales y sin acentos.");
     }
@@ -20,13 +22,20 @@ function encriptar() {
 
 function desencriptar() {
     var cajatexto = recuperarTexto();
-    if (validarTexto(cajatexto) || cajatexto.match(/ai|enter|imes|ober|ufat/)) {
+    if (cajatexto === "") {
+        mostrarMensajeNoEncontrado();
+    } else if (validarTexto(cajatexto) || cajatexto.match(/ai|enter|imes|ober|ufat/)) {
         resultado.textContent = desencriptarTexto(cajatexto);
         mostrar();
-        document.querySelector(".cajatexto").value = ""; // Borra el contenido de cajatexto
+        document.querySelector(".cajatexto").value = ""; // Limpiar la cajatexto
     } else {
         alert("El texto debe estar en minúsculas, sin caracteres especiales y sin acentos.");
     }
+}
+
+function mostrarMensajeNoEncontrado() {
+    rs.style.display = "none"; // Ocultar el contenedor de resultados
+    contenedor.style.display = "block"; // Mostrar la imagen y el mensaje
 }
 
 function recuperarTexto() {
@@ -41,7 +50,7 @@ function mostrar() {
 }
 
 function ocultarAdelante() {
-    // Puedes implementar esta función si es necesario
+    // Implementar esta función si es necesario
 }
 
 function validarTexto(texto) {
