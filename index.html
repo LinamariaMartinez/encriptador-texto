@@ -1,60 +1,76 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es-419">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="styles/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
-    <title>Encriptador de Texto</title>
-</head>
-<body>
-    <header>
-        <img class="logo" src="styles/imagenes/logo.svg" alt="Logo de Alura">
-        <!-- <h1 class="tituloPrincipal">ENCRIPTADOR DE TEXTO</h1>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Permissions-Policy" content="interest-cohort=()" />
+        <link rel="stylesheet" href="reset.css" />
+        <link rel="stylesheet" href="styles/style.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap"
+            rel="stylesheet"
+        />
+        <title>Encriptador de Texto</title>
+    </head>
+    <body>
+        <header>
+            <img
+                class="logo"
+                src="styles/imagenes/logo.svg"
+                alt="Logo de Alura"
+            />
+            <!-- <h1 class="tituloPrincipal">ENCRIPTADOR DE TEXTO</h1>
         <h1>""</h1> -->
-    </header>
+        </header>
 
-    <main>
-        <section class="seccion1">
-            <div class="contenedor-cajatexto">
-                <textarea cols="30" rows="10" placeholder="Ingrese el texto aquí" class="cajatexto"></textarea>
-            </div>
-            <div class="alerta">
-                <img src="styles/imagenes/alerta.svg" alt="alerta">
-                <h6>Solo letras minúsculas y sin acentos</h6>
-            </div>
-            <div class="contenedor-botones">
-                <button class="btn-encriptar">Encriptar</button>
-                <button class="btn-desencriptar">Desencriptar</button>
-            </div>        
-        </section>
-        <section class="seccion2">
-            <div id="munheco">
-                <div class="contenedor-munheco">
-                    <img src="styles/imagenes/munheco.svg" alt="Muñeco">
+        <main>
+            <section class="seccion1">
+                <div class="contenedor-cajatexto">
+                    <textarea
+                        cols="30"
+                        rows="10"
+                        placeholder="Ingrese el texto aquí"
+                        class="cajatexto"
+                    ></textarea>
                 </div>
-                <div class="contenedor-parrafo">
-                    <h3>Ningún mensaje fue encontrado</h3>
-                    <p>Ingresa el texto que desees encriptar o desencriptar</p>
+                <div class="alerta">
+                    <img src="styles/imagenes/alerta.svg" alt="alerta" />
+                    <h6>Solo letras minúsculas y sin acentos</h6>
                 </div>
-            </div>
-            <div id="resultado">
-                <div class="contenedor-resultado">
-                    <p class="texto-resultado"></p>
-                    <div class="contenedor-copiarpegar">
-                        <button class="btn-copiar">Copiar</button>
-                        <button class="btn-pegar">Pegar</button>
+                <div class="contenedor-botones">
+                    <button class="btn-encriptar">Encriptar</button>
+                    <button class="btn-desencriptar">Desencriptar</button>
+                </div>
+            </section>
+            <section class="seccion2">
+                <div id="munheco">
+                    <div class="contenedor-munheco">
+                        <img src="styles/imagenes/munheco.svg" alt="Muñeco" />
+                    </div>
+                    <div class="contenedor-parrafo">
+                        <h3>Ningún mensaje fue encontrado</h3>
+                        <p>
+                            Ingresa el texto que desees encriptar o desencriptar
+                        </p>
                     </div>
                 </div>
-                
-            </div>
-        </section>
-    </main>
-    <footer>
-        <p >Diseñado por Linamaría Martínez para Alura y Oracle Next Education - 2024</p>
-    </footer>
-    <script src="script.js"></script>
-</body>
+                <div id="resultado">
+                    <div class="contenedor-resultado">
+                        <p class="texto-resultado"></p>
+                        <div class="contenedor-copiarpegar">
+                            <button class="btn-copiar">Copiar</button>
+                            <button class="btn-pegar">Pegar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>
+                Diseñado por Linamaría Martínez para Alura y Oracle Next
+                Education - 2024
+            </p>
+        </footer>
+        <script src="script.js" type="module" defer></script>
+    </body>
 </html>
