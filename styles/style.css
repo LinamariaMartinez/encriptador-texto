@@ -15,11 +15,17 @@
     font-family: "Inter", sans-serif;
 }
 
+/* FOOTER SIEMPRE AL FINAL */
+html,
+body {
+    height: 100%;
+}
+
 body {
     background: var(--color_primario);
-    height: 100vh;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
 
 header {
@@ -28,6 +34,10 @@ header {
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
+    position: sticky;
+    top: 0;
+    background: var(--color_primario);
+    z-index: 100;
 }
 
 .logo {
@@ -37,23 +47,16 @@ header {
     padding-top: 40px;
 }
 
-/* .tituloPrincipal{
-    text-align: center;
-    font-size: 50px;
-    font-family: 'Inter', sans-serif;
-    color: var(--color_secundario);
-    font-weight: bold;
-    padding-right: 40px;
-} */
-
 main {
-    height: var(--altura-main);
+    flex: 1;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 50px;
+    margin-bottom: 0;
     margin-left: 80px;
     align-items: center;
+    padding: 20px 0;
+    overflow-y: auto;
 }
 
 .seccion1,
@@ -79,14 +82,16 @@ main {
     box-sizing: border-box;
 }
 
+/* CAJA DE TEXTO OPTIMIZADA */
 .contenedor-cajatexto {
     width: 100%;
-    height: auto;
+    height: 400px; /* ALTURA FIJA MÁS PEQUEÑA */
     padding-top: 10px;
     border: none;
     text-transform: lowercase;
     margin-top: 50px;
     color: var(--color_primario);
+    position: relative; /* Para posicionar el mensaje de error */
 }
 
 ::placeholder {
@@ -99,7 +104,6 @@ main {
 .cajatexto {
     width: 100%;
     height: 100%;
-    top: 100px;
     border: none;
     background-color: #f4f4fc;
     cursor: pointer;
@@ -107,10 +111,21 @@ main {
     font-size: 32px;
     font-weight: 400;
     font-family: "Inter", sans-serif;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    resize: none; /* EVITAR REDIMENSIONAR */
+    overflow-y: auto; /* SCROLL INTERNO */
+    padding: 15px; /* PADDING INTERNO */
 }
 
 .cajatexto::placeholder {
     color: var(--color_secundario);
+}
+
+.cajatexto:focus {
+    border-color: var(--color_secundario);
+    box-shadow: 0 0 10px rgba(10, 56, 113, 0.2);
+    outline: none;
 }
 
 .alerta {
@@ -128,7 +143,7 @@ main {
 }
 
 .alerta img {
-    margin-right: 10px; /* Espacio entre la imagen y el texto */
+    margin-right: 10px;
 }
 
 .contenedor-botones {
@@ -139,6 +154,7 @@ main {
     margin-top: 18px;
 }
 
+/* BOTONES PRINCIPALES - DISEÑO ORIGINAL */
 .btn-encriptar {
     width: 328px;
     height: 67px;
@@ -149,9 +165,12 @@ main {
     font-size: 16px;
     font-weight: 400;
     font-family: "Inter", sans-serif;
-    border: none;
     cursor: pointer;
     margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    transform: translateY(0);
 }
 
 .btn-desencriptar {
@@ -164,10 +183,32 @@ main {
     font-size: 16px;
     font-weight: 400;
     font-family: "Inter", sans-serif;
-    border: 1px solid #0a3871;
     cursor: pointer;
     margin-bottom: 30px;
     margin-left: 72px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    transform: translateY(0);
+}
+
+/* EFECTOS HOVER PARA BOTONES PRINCIPALES */
+.btn-encriptar:hover,
+.btn-desencriptar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(10, 56, 113, 0.3);
+}
+
+.btn-encriptar:active,
+.btn-desencriptar:active {
+    transform: translateY(0);
+    transition: transform 0.1s;
+}
+
+.btn-encriptar:focus,
+.btn-desencriptar:focus {
+    outline: 2px solid #0a3871;
+    outline-offset: 2px;
 }
 
 .seccion2 {
@@ -177,7 +218,7 @@ main {
     align-items: center;
     width: 50%;
     height: 100%;
-    flex: 1; /* Las secciones ocuparán el mismo espacio */
+    flex: 1;
     box-sizing: border-box;
 }
 
@@ -187,44 +228,47 @@ main {
     border: none;
     display: flex;
     flex-direction: column;
-    /* justify-content: space-around; */
     align-items: center;
+    justify-content: space-between;
     width: 400px;
-    height: 944px;
-    padding: 5px;
+    height: 600px;
+    padding: 40px 20px 60px 20px;
     margin-top: 20px;
     background-color: white;
     box-sizing: border-box;
     border-radius: 32px;
     box-shadow: 0px 24px 32px -8px rgba(0, 0, 0, 0.5);
-    position: relative; /* Cambiado de fixed a relative */
+    position: relative;
+    transition: all 0.4s ease-in-out;
 }
 
 .contenedor-munheco {
     box-sizing: border-box;
-    padding-top: 20px;
+    padding: 0;
     text-align: center;
-    max-height: 100%;
-    overflow: auto; /* Permite scroll interno si el contenido es demasiado grande */
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .contenedor-munheco img {
-    max-width: 100%; /* Asegura que la imagen no sobrepase el contenedor */
-    height: auto; /* Mantiene las proporciones de la imagen */
-    display: block; /* Evita que la imagen genere un espacio extra por ser inline */
+    max-width: 80%;
+    height: auto;
+    display: block;
 }
 
 .contenedor-parrafo {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 50px;
-    background-color: #ffffff;
-    border-radius: 24px;
-    overflow: auto; /* Permite scroll interno si el contenido es demasiado grande */
-    max-height: 100%;
+    padding: 0;
+    background-color: transparent;
+    text-align: center;
+    margin-top: 20px;
 }
 
 .contenedor-parrafo:focus {
@@ -236,7 +280,9 @@ main {
     font-size: 24px;
     font-weight: 700;
     text-align: center;
-    color: gray-500;
+    color: #495057;
+    margin-bottom: 15px;
+    line-height: 1.2;
 }
 
 .contenedor-parrafo p {
@@ -244,68 +290,67 @@ main {
     font-size: 16px;
     font-weight: 400;
     text-align: center;
-    color: gray-400;
-    padding-top: 20px;
-    border: none;
+    color: #495057;
+    padding: 0;
+    margin: 0;
+    line-height: 1.4;
 }
 
 #resultado {
     display: none;
     width: 60%;
-    height: 100%;
+    height: auto;
     box-sizing: border-box;
     padding-right: 40px;
+    margin-top: 20px;
+    transition: all 0.4s ease-in-out;
 }
 
 .contenedor-resultado {
     width: 100%;
-    height: var(--altura-main);
-    padding: 80px 40px;
-    padding-bottom: 80px;
+    height: 600px;
     background-color: #ffffff;
     box-sizing: border-box;
     border-radius: 32px;
     box-shadow: 0px 24px 32px -8px rgba(0, 0, 0, 0.5);
-    overflow: hidden; /* Oculta el contenido que excede el contenedor */
     display: flex;
     flex-direction: column;
     position: relative;
+    padding: 40px;
+    padding-bottom: 100px;
 }
 
 .texto-resultado {
-    flex: 1; /* Ocupa todo el espacio disponible menos el espacio para los botones */
-    overflow-y: auto; /* Permite hacer scroll si el texto es largo */
-    padding-bottom: 80px;
+    flex: 1;
+    overflow-y: auto;
     color: #495057;
     font-size: 24px;
-    word-wrap: break-word; /* Permite que las palabras largas se dividan en líneas */
+    word-wrap: break-word;
     text-align: left;
-}
-
-.contenedor-resultado p {
-    padding-left: 10px;
     padding-right: 10px;
-    color: #495057;
-    font-size: 24px;
+    margin-bottom: 0;
+    scroll-behavior: smooth;
 }
 
 .contenedor-copiarpegar {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    right: 30px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 10px;
-    width: 100%;
-    height: 60px;
-    position: absolute; /* Fija la posición de los botones dentro del contenedor resultado */
-    bottom: 70px; /* Espacio desde el borde inferior del contenedor de resultados */
-    left: 0;
-    right: 0;
+    gap: 15px;
+    height: 67px;
     background-color: #ffffff;
-    padding: 20px;
+    padding: 0;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 15px;
 }
 
+/* BOTONES COPIAR/PEGAR - DISEÑO ORIGINAL */
 .btn-copiar {
-    width: 336px;
+    width: 100%;
     height: 67px;
     border-radius: 24px;
     background-color: #ffffff;
@@ -315,12 +360,14 @@ main {
     font-family: "Inter", sans-serif;
     border: 1px solid var(--color_secundario);
     cursor: pointer;
-    margin-bottom: 0px;
+    margin: 0;
     position: relative;
+    transition: all 0.3s ease;
+    transform: translateY(0);
 }
 
 .btn-pegar {
-    width: 336px;
+    width: 100%;
     height: 67px;
     border-radius: 24px;
     background-color: var(--color_terciario);
@@ -330,22 +377,32 @@ main {
     font-family: "Inter", sans-serif;
     border: 1px solid var(--color_secundario);
     cursor: pointer;
-    margin-bottom: 0px;
-    /* margin-left: 108px;
-    margin-top: 402px */
+    margin: 0;
     position: relative;
+    transition: all 0.3s ease;
+    transform: translateY(0);
 }
 
-.resaltado {
-    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
-    transform: scale(1.05);
-    transition:
-        transform 0.1s ease-in-out,
-        box-shadow 0.1s ease-in-out;
+/* EFECTOS HOVER PARA BOTONES COPIAR/PEGAR */
+.btn-copiar:hover,
+.btn-pegar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(10, 56, 113, 0.3);
+}
+
+.btn-copiar:active,
+.btn-pegar:active {
+    transform: translateY(0);
+    transition: transform 0.1s;
+}
+
+.btn-copiar:focus,
+.btn-pegar:focus {
+    outline: 2px solid #0a3871;
+    outline-offset: 2px;
 }
 
 footer {
-    height: var(--altura-footer);
     display: flex;
     justify-content: center;
     text-align: center;
@@ -371,79 +428,321 @@ footer p {
     display: block;
 }
 
-/* Estilos para dispositivos móviles y tablets */
-@media (max-width: 1024px) and (min-width: 600px) {
+/* MENSAJES DE ERROR ELEGANTES - POSICIONADOS INMEDIATAMENTE DESPUÉS DE CAJA DE TEXTO */
+.mensaje-error {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+    margin: 10px 0 0 0; /* SOLO MARGEN SUPERIOR */
+    animation: slideInDown 0.3s ease-out forwards;
+    width: 100%;
+    box-sizing: border-box;
+    position: absolute; /* POSICIÓN ABSOLUTA */
+    top: 100%; /* JUSTO DEBAJO DEL CONTENEDOR */
+    left: 0;
+    z-index: 10;
+}
+
+.mensaje-error.mostrar {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.mensaje-error-contenido {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(238, 90, 82, 0.4);
+    border-left: 4px solid #ff4757;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.mensaje-error-icono {
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.mensaje-error-texto {
+    font-family: "Inter", sans-serif;
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.mensaje-error-cerrar {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+
+.mensaje-error-cerrar:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* MENSAJES DE ÉXITO */
+.mensaje-exito {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease;
+}
+
+.mensaje-exito.mostrar {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.mensaje-exito-contenido {
+    background: linear-gradient(135deg, #2ed573, #1dd1a1);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(45, 213, 115, 0.3);
+    border-left: 4px solid #00d2d3;
+}
+
+.mensaje-exito-icono {
+    font-size: 16px;
+}
+
+.mensaje-exito-texto {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.input-error {
+    border: 2px solid #dc3545 !important;
+    box-shadow: 0 0 5px rgba(220, 53, 69, 0.3);
+}
+
+/* CUSTOM SCROLLBAR PARA TEXTO RESULTADO */
+.texto-resultado::-webkit-scrollbar {
+    width: 8px;
+}
+
+.texto-resultado::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.texto-resultado::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.texto-resultado::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* CUSTOM SCROLLBAR PARA CAJA DE TEXTO */
+.cajatexto::-webkit-scrollbar {
+    width: 8px;
+}
+
+.cajatexto::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.cajatexto::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.cajatexto::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* ANIMACIONES */
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* SIN SCROLL EN DESKTOP */
+@media (min-width: 1025px) {
+    main {
+        height: calc(100vh - 130px);
+        overflow: hidden;
+    }
+
+    .seccion1,
+    .seccion2 {
+        height: 100%;
+        overflow-y: auto;
+    }
+}
+
+/* Estilos para tablets */
+@media (max-width: 1024px) and (min-width: 601px) {
     main {
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
         margin-left: 0;
         margin-right: 0;
         margin-bottom: 0;
         height: auto;
+        padding: 30px 20px;
+        gap: 30px;
     }
 
     .seccion1,
     .seccion2 {
-        width: 100%; /* Las secciones ocuparán todo el ancho disponible */
+        width: 100%;
+        max-width: 800px;
         padding: 20px;
     }
 
     .seccion1 {
-        padding: 60px 60px 10px 60px;
+        padding: 40px 40px 20px 40px;
     }
 
-    #munheco img {
-        display: none; /* Ocultar la imagen del muñeco en pantallas pequeñas */
+    .seccion2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
-    .contenedor-cajatexto,
-    .contenedor-resultado {
-        height: 150px;
+    .contenedor-cajatexto {
+        height: 200px; /* ALTURA REDUCIDA PARA TABLET */
+        margin-top: 20px;
+    }
+
+    .cajatexto {
+        font-size: 18px; /* TEXTO MÁS PEQUEÑO */
     }
 
     #munheco,
     #resultado {
         width: 90%;
+        max-width: 600px;
         height: auto;
+        margin: 0 auto;
+    }
+
+    #munheco {
+        height: 450px;
+        justify-content: center;
+        padding: 30px 20px 50px 20px;
+    }
+
+    .contenedor-munheco img {
+        max-width: 70%;
+    }
+
+    #munheco img {
+        display: none;
     }
 
     .contenedor-munheco {
         width: 100%;
-        padding: 20px;
-    }
-
-    #resultado {
-        width: 90%;
-        margin-top: 20px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
+        min-height: 300px;
     }
 
     .contenedor-resultado {
-        height: auto; /* Ajusta la altura automáticamente */
-        padding: 50px; /* Espaciado uniforme en pantallas más pequeñas */
+        height: 450px;
+        min-height: 400px;
+        max-height: 450px;
+        padding: 30px;
+        padding-bottom: 90px;
     }
 
     .contenedor-copiarpegar {
-        bottom: 30px;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        gap: 15px;
+        height: 60px;
     }
 
     .btn-copiar,
     .btn-pegar {
-        width: 100%; /* Botones ocupan todo el ancho disponible */
-        height: 60px; /* Ajusta la altura de los botones */
+        height: 50px;
+    }
+
+    .contenedor-botones {
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .btn-desencriptar {
+        margin-left: 0;
     }
 
     footer {
-        position: sticky; /* Asegura que el footer se quede al final del contenido */
-        margin-top: 20px; /* Empuja el footer al final de la pantalla si el contenido es más corto */
+        position: sticky;
+        margin-top: 40px;
+        width: 100%;
+        padding: 20px 10px;
+        height: auto;
+        line-height: 1.4;
+    }
+
+    footer p {
+        font-size: 14px;
+        margin: 0;
     }
 }
 
-/* Media query para móviles (pantallas de hasta 600px) */
+/* Media query para móviles */
 @media (max-width: 600px) {
     body {
         margin: 0;
+        min-height: 100vh;
+    }
+
+    /* HEADER FIJO EN MÓVIL */
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: var(--color_primario);
+        height: 60px;
+    }
+
+    .logo {
+        width: 120px;
+        height: 60px;
+        padding: 10px 0 0 20px;
     }
 
     main {
@@ -451,42 +750,58 @@ footer p {
         align-items: center;
         justify-content: flex-start;
         margin: 0;
-        height: auto;
+        margin-top: 60px;
+        padding: 10px;
+        gap: 15px;
     }
+
     .seccion1,
     .seccion2 {
         width: 100%;
         padding: 10px;
-        /* margin: 0; */
     }
 
     .seccion1 {
-        padding: 60px 60px 10px 60px; /* top | right | bottom | left */
+        padding: 20px;
         margin: 10px;
     }
 
-    #munheco img {
-        display: none; /* Ocultar la imagen del muñeco en pantallas pequeñas */
-    }
-
-    .contenedor-cajatexto,
-    .contenedor-resultado {
-        height: auto;
-    }
-
     .contenedor-cajatexto {
+        height: 120px; /* ALTURA PEQUEÑA EN MÓVIL */
         margin-top: 10px;
+    }
+
+    #munheco img {
+        display: none;
+    }
+
+    .cajatexto {
+        font-size: 16px;
+        padding: 10px; /* PADDING REDUCIDO */
     }
 
     #munheco,
     #resultado {
         width: 90%;
-        height: auto;
+        margin-bottom: 20px;
+    }
+
+    #munheco {
+        height: 350px;
+        padding: 20px 15px 40px 15px;
     }
 
     .contenedor-munheco {
         width: 100%;
         padding: 20px;
+    }
+
+    .contenedor-parrafo h3 {
+        font-size: 20px;
+    }
+
+    .contenedor-parrafo p {
+        font-size: 14px;
     }
 
     .alerta {
@@ -498,85 +813,91 @@ footer p {
 
     .contenedor-botones {
         width: 100%;
-        bottom: 30px;
         flex-direction: column;
         align-items: center;
+        gap: 15px;
+        margin-top: 25px;
     }
 
     .btn-encriptar,
     .btn-desencriptar {
         width: 100%;
         height: 60px;
-        margin: 0 10px 10px 0;
-    }
-
-    #resultado {
-        width: 90%;
-        margin-top: 20px;
-        justify-content: center;
+        margin: 0;
     }
 
     .contenedor-resultado {
-        height: auto; /* Ajusta la altura automáticamente */
-        padding: 50px; /* Espaciado uniforme en pantallas más pequeñas */
+        height: 350px;
+        min-height: 300px;
+        max-height: 350px;
+        padding: 20px;
+        padding-bottom: 100px;
+    }
+
+    .texto-resultado {
+        font-size: 18px;
+        line-height: 1.4;
     }
 
     .contenedor-copiarpegar {
-        bottom: 30px;
+        bottom: 15px;
+        left: 15px;
+        right: 15px;
+        flex-direction: column;
+        gap: 10px;
+        height: 70px;
     }
 
     .btn-copiar,
     .btn-pegar {
-        width: 100%; /* Botones ocupan todo el ancho disponible */
-        height: 60px; /* Ajusta la altura de los botones */
+        width: 100%;
+        height: 30px;
+        font-size: 14px;
     }
 
     footer {
-        position: sticky; /* Asegura que el footer se quede al final del contenido */
-        margin-top: 20px; /* Empuja el footer al final de la pantalla si el contenido es más corto */
+        position: relative;
+        margin-top: auto;
         width: 100%;
+        height: auto;
+        padding: 15px 10px;
+        line-height: 1.4;
+        background-color: var(--color_secundario);
+        box-sizing: border-box;
     }
-}
 
-/* Mejoras de UX */
-.mensaje-error {
-    display: none;
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 10px;
-    border: 1px solid #f5c6cb;
-    border-radius: 4px;
-    margin-top: 10px;
-    font-size: 14px;
-    animation: slideDown 0.3s ease-out;
-}
+    footer p {
+        margin: 0;
+        font-size: 14px;
+        color: white;
+    }
 
-.input-error {
-    border: 2px solid #dc3545 !important;
-    box-shadow: 0 0 5px rgba(220, 53, 69, 0.3);
-}
-
-.feedback-success {
-    background-color: #28a745 !important;
-    transition: background-color 0.3s ease;
-}
-
-@keyframes slideDown {
-    from {
+    /* MENSAJES EN MÓVIL */
+    .mensaje-exito {
+        position: fixed;
+        top: 80px;
+        left: 10px;
+        right: 10px;
+        z-index: 1000;
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(-20px);
+        transition: all 0.3s ease;
     }
-    to {
+
+    .mensaje-exito.mostrar {
         opacity: 1;
         transform: translateY(0);
     }
-}
 
-/* Mejorar accesibilidad */
-.btn-encriptar:focus,
-.btn-desencriptar:focus,
-.btn-copiar:focus,
-.btn-pegar:focus {
-    outline: 2px solid #0a3871;
-    outline-offset: 2px;
+    .mensaje-exito-contenido {
+        padding: 15px 20px;
+        font-size: 16px;
+        text-align: center;
+        box-shadow: 0 6px 20px rgba(45, 213, 115, 0.4);
+    }
+
+    .mensaje-error-contenido {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
 }

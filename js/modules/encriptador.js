@@ -14,7 +14,9 @@ const Encriptador = {
   // Algoritmos
   encriptar(texto) {
     if (!this.esTextoValido(texto)) {
-      throw new Error("Texto contiene caracteres no válidos. Usar solo letras minúsculas y sin acentos.");
+      throw new Error(
+        "El texto contiene caracteres no válidos. Usar solo letras minúsculas y sin acentos.",
+      );
     }
 
     return texto.replace(/[aeiou]/g, (letra) => ALGORITMO_ENCRIPTACION[letra]);
