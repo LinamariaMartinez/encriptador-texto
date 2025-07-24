@@ -8,7 +8,6 @@ const Controlador = {
   },
 
   configurarEventos() {
-    // Eventos principales
     Interfaz.elementos.btnEncriptar.addEventListener(
       "click",
       this.manejarEncriptacion.bind(this),
@@ -25,15 +24,9 @@ const Controlador = {
       "click",
       this.manejarPegado.bind(this),
     );
-
-    // Validación en tiempo real (con debounce)
-    this.configurarValidacionTiempoReal();
-
-    // Efectos visuales
-    this.configurarEfectosVisuales();
   },
 
-  async manejarEncriptacion() {
+  manejarEncriptacion() {
     try {
       const texto = Interfaz.obtenerTextoEntrada();
 
@@ -50,7 +43,7 @@ const Controlador = {
     }
   },
 
-  async manejarDesencriptacion() {
+  manejarDesencriptacion() {
     try {
       const texto = Interfaz.obtenerTextoEntrada();
 
@@ -59,10 +52,9 @@ const Controlador = {
         return;
       }
 
-      // Validar que el texto tenga patrones de encriptación o sea válido
       if (
         !Encriptador.esTextoValido(texto) &&
-        !this.tienePatronesEncriptados(texto)
+        !Encriptador.tienePatronesEncriptados(texto)
       ) {
         throw new Error(
           "El texto debe estar en minúsculas, sin caracteres especiales y sin acentos.",
@@ -81,7 +73,12 @@ const Controlador = {
     try {
       const texto = Interfaz.elementos.textoResultado.textContent;
       await navigator.clipboard.writeText(texto);
-      this.mostrarFeedbackTemporal(Interfaz.elementos.btnCopiar, "¡Copiado!");
+
+      // MOSTRAR ÉXITO CON SCROLL A CAJA DE TEXTO
+      Interfaz.mostrarExito(
+        "¡Texto copiado! Puedes pegarlo en la caja de texto.",
+        "cajatexto",
+      );
     } catch (error) {
       Interfaz.mostrarError("Error al copiar al portapapeles");
     }
@@ -92,70 +89,18 @@ const Controlador = {
       const texto = await navigator.clipboard.readText();
       Interfaz.elementos.cajatexto.value = texto;
 
-      // Scroll al inicio en móviles
-      if (window.matchMedia("(max-width: 700px)").matches) {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
+      // MOSTRAR ÉXITO SIN SCROLL (ya está en la caja de texto)
+      Interfaz.mostrarExito("¡Texto pegado exitosamente!");
 
-      this.mostrarFeedbackTemporal(Interfaz.elementos.btnPegar, "¡Pegado!");
+      // AJUSTAR ALTURA SI ES MÓVIL
+      if (Interfaz.esMobile()) {
+        const textarea = Interfaz.elementos.cajatexto;
+        textarea.style.height = "auto";
+        textarea.style.height = Math.min(textarea.scrollHeight, 200) + "px";
+      }
     } catch (error) {
       Interfaz.mostrarError("Error al pegar desde el portapapeles");
     }
-  },
-
-  // Utilidades
-  tienePatronesEncriptados(texto) {
-    return /ai|enter|imes|ober|ufat/.test(texto);
-  },
-
-  mostrarFeedbackTemporal(elemento, mensaje) {
-    const textoOriginal = elemento.textContent;
-    elemento.textContent = mensaje;
-    elemento.style.backgroundColor = "#28a745";
-
-    setTimeout(() => {
-      elemento.textContent = textoOriginal;
-      elemento.style.backgroundColor = "";
-    }, 1500);
-  },
-
-  configurarValidacionTiempoReal() {
-    let timeoutId;
-
-    Interfaz.elementos.cajatexto.addEventListener("input", (e) => {
-      clearTimeout(timeoutId);
-
-      timeoutId = setTimeout(() => {
-        const texto = e.target.value;
-        if (texto && !Encriptador.esTextoValido(texto)) {
-          e.target.classList.add("input-error");
-        } else {
-          e.target.classList.remove("input-error");
-        }
-      }, 300); // Debounce de 300ms
-    });
-  },
-
-  configurarEfectosVisuales() {
-    const botones = [
-      Interfaz.elementos.btnEncriptar,
-      Interfaz.elementos.btnDesencriptar,
-      Interfaz.elementos.btnCopiar,
-      Interfaz.elementos.btnPegar,
-    ];
-
-    botones.forEach((boton) => {
-      boton.addEventListener("click", this.aplicarEfectoClick);
-    });
-  },
-
-  aplicarEfectoClick(event) {
-    const boton = event.target;
-    boton.classList.add("resaltado");
-
-    setTimeout(() => {
-      boton.classList.remove("resaltado");
-    }, 200);
   },
 };
 
